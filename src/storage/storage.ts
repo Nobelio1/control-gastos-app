@@ -52,14 +52,13 @@ export const deleteTransaction = async (id: string): Promise<TransactionsArray> 
   }
 }
 
-export const updateTransaction = async (updatedTransaction: Transaction): Promise<TransactionsArray> => {
+export const updateTransaction = async (id: string, updatedTransaction: TransactionForm): Promise<TransactionsArray> => {
   try {
     const transactions = await getTransactions();
-    const index = transactions.findIndex(transaction => transaction.id === updatedTransaction.id);
+    const index = transactions.findIndex(transaction => transaction.id === id);
     if (index === -1) throw new Error("Transaction not found");
 
-    //todo: Validar que el updatedTransaction tenga los campos necesarios
-    transactions[index] = updatedTransaction;
+    transactions[index] = {...transactions[index], ...updatedTransaction};
     await storeTransactions(transactions);
     return transactions;
   } catch (e) {
