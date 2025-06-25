@@ -6,13 +6,13 @@ import {
   SafeAreaView,
   KeyboardAvoidingView,
   Platform,
-  TouchableWithoutFeedback, Keyboard,
+  TouchableWithoutFeedback, Keyboard, Alert,
 } from 'react-native';
 import {useForm, Controller} from 'react-hook-form';
 import {LinearGradient} from 'expo-linear-gradient';
 import {TransactionForm, TransactionType} from "../../types/form.types";
 import {addFormStyles} from './AddForm.styles';
-import {useNavigation} from "@react-navigation/native";
+import {useTransactionStore} from "../../storage/transactionStore";
 
 export function AddForm() {
   const {
@@ -29,7 +29,10 @@ export function AddForm() {
     },
     mode: 'onChange'
   });
-  const navigation = useNavigation();
+
+  const addTransaction = useTransactionStore((state) => state.addTransaction);
+  const isLoading = useTransactionStore((state) => state.isLoading);
+  const setLoading = useTransactionStore((state) => state.setLoading);
 
   const selectedType = watch('type');
 
@@ -44,12 +47,12 @@ export function AddForm() {
   };
 
   const onSubmit = (data: TransactionForm) => {
-    console.log(data);
+    setLoading(true);
+    addTransaction(data)
     reset()
-    //todo: Pensarlo mejor
-    // setTimeout(() => {
-    //   navigation.navigate('Home' as never);
-    // }, 1500);
+    Keyboard.dismiss();
+    Alert.alert('Exito', 'Transacción guardada correctamente')
+    setLoading(false);
   };
 
   return (
@@ -214,7 +217,9 @@ export function AddForm() {
                 end={{x: 1, y: 0}}
                 style={addFormStyles.saveButton}
               >
-                <Text style={addFormStyles.saveButtonText}>Guardar</Text>
+                <Text style={addFormStyles.saveButtonText}>
+                  {isLoading ? 'Guardando...' : 'Guardar'}
+                </Text>
               </LinearGradient>
             </TouchableOpacity>
           </View>
