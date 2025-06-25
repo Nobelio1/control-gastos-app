@@ -80,11 +80,12 @@ export const selectTotalExpense = (state: TransactionState) =>
     .reduce((sum, t) => sum + t.amount, 0);
 
 export const selectBalance = (state: TransactionState) => {
-  const income = state.transactions
-    .filter(t => t.type === TransactionType.INCOME)
-    .reduce((sum, t) => sum + t.amount, 0);
-  const expense = state.transactions
-    .filter(t => t.type === TransactionType.EXPENSE)
-    .reduce((sum, t) => sum + t.amount, 0);
-  return income - expense;
-};
+    const income = state.transactions
+      .filter(t => t.type === TransactionType.INCOME)
+      .reduce((sum, t) => sum + t.amount, 0);
+    const expense = state.transactions
+      .filter(t => t.type === TransactionType.EXPENSE)
+      .reduce((sum, t) => sum + t.amount, 0);
+    return income - expense;
+  }
+;

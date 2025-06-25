@@ -1,31 +1,34 @@
 import {Text, View} from "react-native";
 import {Ionicons} from "@expo/vector-icons";
 import {monthSummaryCardStyles} from "./MonthSummaryCard.styles";
+import {MonthlyStats} from "../../types/monthyStats.types";
 
-export function MonthSummaryCard() {
+export function MonthSummaryCard({month}: { month: MonthlyStats }) {
+  const {month: monthI, balance, expense, income} = month
+
   return (
     <View style={monthSummaryCardStyles.container}>
-      <Text style={monthSummaryCardStyles.totalPeriod}>Jun. 2023</Text>
-      <Text style={monthSummaryCardStyles.totalAmount}>$ 41.000,00</Text>
+      <Text style={monthSummaryCardStyles.totalPeriod}>{`${monthI}`}</Text>
+      <Text style={monthSummaryCardStyles.totalAmount}>S/.{balance}</Text>
       <View style={{paddingTop: 14}}>
         <View style={monthSummaryCardStyles.io}>
-          <FlowCard inOut={true}/>
-          <FlowCard inOut={false}/>
+          <FlowCard amount={income} inOut={true}/>
+          <FlowCard amount={expense} inOut={false}/>
         </View>
       </View>
     </View>
   )
 }
 
-function FlowCard({inOut}: { inOut: boolean }) {
+function FlowCard({inOut, amount}: { inOut: boolean, amount: number }) {
   return (
     <View style={monthSummaryCardStyles.flowCard}>
-      <View style={inOut? monthSummaryCardStyles.flowIconIn : monthSummaryCardStyles.flowIconOut}>
+      <View style={inOut ? monthSummaryCardStyles.flowIconIn : monthSummaryCardStyles.flowIconOut}>
         <Ionicons name={inOut ? "arrow-up" : "arrow-down"} size={24} color="white"/>
       </View>
       <View>
         <Text style={monthSummaryCardStyles.flowType}>{inOut ? "Ingresos" : "Gastos"}</Text>
-        <Text style={monthSummaryCardStyles.flowAmount}>$55.420,00</Text>
+        <Text style={monthSummaryCardStyles.flowAmount}>S/.{amount}</Text>
       </View>
     </View>
   )
