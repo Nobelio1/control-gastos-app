@@ -17,9 +17,9 @@ export const transferSummaryStyles = StyleSheet.create({
   },
   totalAmount:{
     color: '#fff',
-    fontSize: 26,
-    fontWeight: '600',
-    paddingVertical: 10,
+    fontSize: 30,
+    fontWeight: 'bold',
+    paddingVertical: 6,
   },
   io: {
     flexDirection: 'row',

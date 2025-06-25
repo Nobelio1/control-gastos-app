@@ -1,23 +1,34 @@
 import {View, Text} from 'react-native';
 import {transferSummaryStyles} from "./TransferSummary.styles";
 import {Ionicons} from "@expo/vector-icons";
+import {
+  selectBalance,
+  selectTotalExpense,
+  selectTotalIncome,
+  useTransactionStore
+} from "../../../storage/transactionStore";
+import {getCurrentMonthRange} from "../../../utils/dateUtils";
 
 export function TransferSummary() {
+  const income = useTransactionStore(selectTotalIncome);
+  const expense = useTransactionStore(selectTotalExpense);
+  const balance = useTransactionStore(selectBalance);
+
   return (
     <View style={transferSummaryStyles.container}>
       <View style={transferSummaryStyles.total}>
-        <Text style={transferSummaryStyles.totalPeriod}>1. Jun. 2023 - 4 Jun. 2023</Text>
-        <Text style={transferSummaryStyles.totalAmount}>$ 41.000,00</Text>
+        <Text style={transferSummaryStyles.totalPeriod}>{getCurrentMonthRange()}</Text>
+        <Text style={transferSummaryStyles.totalAmount}>S/. {balance}</Text>
       </View>
       <View style={transferSummaryStyles.io}>
-        <FlowCard inOut={true}/>
-        <FlowCard inOut={false}/>
+        <FlowCard inOut={true} amount={income}/>
+        <FlowCard inOut={false} amount={expense}/>
       </View>
     </View>
   )
 }
 
-function FlowCard({inOut}: { inOut: boolean }) {
+function FlowCard({inOut, amount}: { inOut: boolean, amount: number }) {
   return (
     <View style={transferSummaryStyles.flowCard}>
       <View style={transferSummaryStyles.flowIcon}>
@@ -25,7 +36,7 @@ function FlowCard({inOut}: { inOut: boolean }) {
       </View>
       <View>
         <Text style={transferSummaryStyles.flowType}>{inOut ? "Ingresos" : "Gastos"}</Text>
-        <Text style={transferSummaryStyles.flowAmount}>$55.420,00</Text>
+        <Text style={transferSummaryStyles.flowAmount}>S/. {amount}</Text>
       </View>
     </View>
   )

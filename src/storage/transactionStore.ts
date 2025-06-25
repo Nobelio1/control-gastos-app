@@ -14,15 +14,11 @@ interface TransactionState {
   setTransactions: (transactions: Transaction[]) => void;
   clearError: () => void;
   setLoading: (loading: boolean) => void;
-
-  totalIncome: number;
-  totalExpense: number;
-  balance: number;
 }
 
 export const useTransactionStore = create<TransactionState>()(
   persist(
-    (set, get) => ({
+    (set) => ({
       transactions: [],
       isLoading: false,
       error: null,
@@ -63,22 +59,6 @@ export const useTransactionStore = create<TransactionState>()(
       clearError: () => set({error: null}),
 
       setLoading: (loading: boolean) => set({isLoading: loading}),
-
-      get totalIncome() {
-        return get().transactions
-          .filter(t => t.type === TransactionType.INCOME)
-          .reduce((sum, t) => sum + t.amount, 0);
-      },
-
-      get totalExpense() {
-        return get().transactions
-          .filter(t => t.type === TransactionType.EXPENSE)
-          .reduce((sum, t) => sum + t.amount, 0);
-      },
-
-      get balance() {
-        return get().totalIncome - get().totalExpense;
-      },
     }),
     {
       name: 'transaction-storage',
@@ -88,10 +68,23 @@ export const useTransactionStore = create<TransactionState>()(
 );
 
 export const selectTransactions = (state: TransactionState) => state.transactions;
-export const selectIsLoading = (state: TransactionState) => state.isLoading;
-export const selectError = (state: TransactionState) => state.error;
-export const selectTotals = (state: TransactionState) => ({
-  income: state.totalIncome,
-  expense: state.totalExpense,
-  balance: state.balance,
-});
+
+export const selectTotalIncome = (state: TransactionState) =>
+  state.transactions
+    .filter(t => t.type === TransactionType.INCOME)
+    .reduce((sum, t) => sum + t.amount, 0);
+
+export const selectTotalExpense = (state: TransactionState) =>
+  state.transactions
+    .filter(t => t.type === TransactionType.EXPENSE)
+    .reduce((sum, t) => sum + t.amount, 0);
+
+export const selectBalance = (state: TransactionState) => {
+  const income = state.transactions
+    .filter(t => t.type === TransactionType.INCOME)
+    .reduce((sum, t) => sum + t.amount, 0);
+  const expense = state.transactions
+    .filter(t => t.type === TransactionType.EXPENSE)
+    .reduce((sum, t) => sum + t.amount, 0);
+  return income - expense;
+};
