@@ -10,7 +10,7 @@ export const statsScreenStyles = StyleSheet.create({
     paddingHorizontal: 20,
   },
   scrollView: {
-    gap: 15,
+    gap: 10,
     flexGrow: 1,
     paddingBottom: 80,
   }

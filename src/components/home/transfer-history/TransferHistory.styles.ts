@@ -17,6 +17,7 @@ export const transferHistoryStyles = StyleSheet.create({
     marginBottom: 30,
   },
   contentContainer: {
+    gap: 10,
     paddingBottom: 20,
   },
   emptyContentContainer: {

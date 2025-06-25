@@ -9,4 +9,9 @@ export const transferScreenStyles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: 20,
   },
+  scrollView: {
+    gap: 10,
+    flexGrow: 1,
+    paddingBottom: 80,
+  }
 });

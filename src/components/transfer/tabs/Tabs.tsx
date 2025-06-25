@@ -9,8 +9,12 @@ import {tabsStyles} from "./Tabs.styles";
 
 const {width: SCREEN_WIDTH} = Dimensions.get('window');
 
-export function Tabs() {
-  const [activeTab, setActiveTab] = useState<'income' | 'expense'>('income');
+interface ITabProps {
+  activeTab: 'income' | 'expense';
+  setActiveTab: React.Dispatch<React.SetStateAction<"income" | "expense">>
+}
+
+export function Tabs({activeTab, setActiveTab}: ITabProps) {
   const translateX = useSharedValue(0);
   const containerWidth = SCREEN_WIDTH - 40;
   const tabWidth = (containerWidth - 8) / 2;
