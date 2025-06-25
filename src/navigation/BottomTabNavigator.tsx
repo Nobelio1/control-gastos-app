@@ -43,9 +43,7 @@ export default function BottomTabNavigator() {
           left: 20,
           right: 20,
           backgroundColor: 'white',
-          borderRadius: 15,
           height: 70,
-          ...styles.shadow
         }
       }}
     >
@@ -88,7 +86,7 @@ export default function BottomTabNavigator() {
         component={AddScreen}
         options={{
           headerShown: false,
-          tabBarIcon: ({focused}) => (
+          tabBarIcon: () => (
             <Ionicons
               name="add"
               size={24}
