@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import {useForm, Controller} from 'react-hook-form';
 import {LinearGradient} from 'expo-linear-gradient';
-import {TransactionFormData, TransactionType} from "../../types/form.types";
+import {TransactionForm, TransactionType} from "../../types/form.types";
 import {addFormStyles} from './AddForm.styles';
 import {useNavigation} from "@react-navigation/native";
 
@@ -21,7 +21,7 @@ export function AddForm() {
     watch,
     reset,
     formState: {errors, isValid}
-  } = useForm<TransactionFormData>({
+  } = useForm<TransactionForm>({
     defaultValues: {
       amount: 0,
       description: '',
@@ -43,7 +43,7 @@ export function AddForm() {
     return cleanText === '' ? 0 : parseInt(cleanText);
   };
 
-  const onSubmit = (data: TransactionFormData) => {
+  const onSubmit = (data: TransactionForm) => {
     console.log(data);
     reset()
     //todo: Pensarlo mejor

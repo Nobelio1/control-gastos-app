@@ -3,8 +3,13 @@ export enum TransactionType {
   EXPENSE = 'expense'
 }
 
-export interface TransactionFormData {
+export interface Transaction {
+  id: string;
   amount: number;
   description: string;
   type: TransactionType;
+  date: string;
 }
+
+export type TransactionForm = Omit<Transaction, 'id' | 'date'>;
+export type TransactionsArray = Transaction[];
