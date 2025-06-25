@@ -9,4 +9,9 @@ export const statsScreenStyles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: 20,
   },
+  scrollView: {
+    gap: 15,
+    flexGrow: 1,
+    paddingBottom: 80,
+  }
 });

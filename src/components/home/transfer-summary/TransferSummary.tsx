@@ -21,7 +21,7 @@ function FlowCard({inOut}: { inOut: boolean }) {
   return (
     <View style={transferSummaryStyles.flowCard}>
       <View style={transferSummaryStyles.flowIcon}>
-        <Ionicons name="arrow-up" size={24} color={inOut ? "green" : "red"}/>
+        <Ionicons name={inOut ? "arrow-up" : "arrow-down"} size={24} color={inOut ? "green" : "red"}/>
       </View>
       <View>
         <Text style={transferSummaryStyles.flowType}>{inOut ? "Ingresos" : "Gastos"}</Text>
