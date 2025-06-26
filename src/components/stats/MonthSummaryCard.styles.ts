@@ -1,4 +1,5 @@
 import {StyleSheet} from 'react-native';
+import {COLORS_CORE} from "../../constants/colors";
 
 export const monthSummaryCardStyles = StyleSheet.create({
   container: {
@@ -8,10 +9,12 @@ export const monthSummaryCardStyles = StyleSheet.create({
     backgroundColor: 'white'
   },
   totalPeriod: {
+    color: COLORS_CORE.SUBTITLE,
     fontSize: 16,
     fontWeight: '600',
   },
   totalAmount: {
+    color: COLORS_CORE.TITLE,
     fontSize: 26,
     fontWeight: '600',
     paddingVertical: 10,
@@ -32,7 +35,7 @@ export const monthSummaryCardStyles = StyleSheet.create({
     width: 40,
     height: 40,
     borderRadius: 20,
-    backgroundColor: 'green',
+    backgroundColor: COLORS_CORE.GREEN_INCOME,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -40,15 +43,16 @@ export const monthSummaryCardStyles = StyleSheet.create({
     width: 40,
     height: 40,
     borderRadius: 20,
-    backgroundColor: 'red',
+    backgroundColor: COLORS_CORE.RED_EXPENSE,
     justifyContent: 'center',
     alignItems: 'center',
   },
   flowType: {
-    color: '#4e565c',
+    color: COLORS_CORE.TITLE,
     fontSize: 16,
   },
   flowAmount: {
+    color: COLORS_CORE.TITLE,
     fontSize: 18,
     fontWeight: '600',
   },

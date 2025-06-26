@@ -1,4 +1,5 @@
 import {StyleSheet} from 'react-native';
+import {COLORS_CORE} from "../../../constants/colors";
 
 export const transferCardStyles = StyleSheet.create({
   container: {
@@ -21,7 +22,7 @@ export const transferCardStyles = StyleSheet.create({
     width: 40,
     height: 40,
     borderRadius: 20,
-    backgroundColor: '#379137',
+    backgroundColor: COLORS_CORE.GREEN_INCOME,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -29,26 +30,27 @@ export const transferCardStyles = StyleSheet.create({
     width: 40,
     height: 40,
     borderRadius: 20,
-    backgroundColor: '#DB3535',
+    backgroundColor: COLORS_CORE.RED_EXPENSE,
     justifyContent: 'center',
     alignItems: 'center',
   },
   titleCard: {
     fontSize: 16,
     fontWeight: '600',
+    color: COLORS_CORE.TITLE,
   },
   dateCard: {
     fontSize: 14,
-    color: '#666',
+    color: COLORS_CORE.SUBTITLE,
   },
   amountIn: {
     fontSize: 16,
     fontWeight: '700',
-    color: '#379137',
+    color: COLORS_CORE.GREEN_INCOME,
   },
   amountOut: {
     fontSize: 16,
     fontWeight: '700',
-    color: '#DB3535',
+    color: COLORS_CORE.RED_EXPENSE,
   },
 })

@@ -1,4 +1,5 @@
 import {StyleSheet} from 'react-native';
+import {COLORS_CORE} from "../../../constants/colors";
 
 export const transferHistoryStyles = StyleSheet.create({
   container: {
@@ -13,7 +14,7 @@ export const transferHistoryStyles = StyleSheet.create({
   title: {
     fontSize: 24,
     fontWeight: 'bold',
-    color: '#333',
+    color: COLORS_CORE.TITLE,
     marginBottom: 30,
   },
   contentContainer: {
@@ -39,13 +40,13 @@ export const transferHistoryStyles = StyleSheet.create({
   emptyTitle: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: '#333',
+    color: COLORS_CORE.TITLE,
     marginBottom: 10,
     textAlign: 'center',
   },
   emptySubtitle: {
     fontSize: 16,
-    color: '#666',
+    color: COLORS_CORE.SUBTITLE,
     textAlign: 'center',
     lineHeight: 22,
   },

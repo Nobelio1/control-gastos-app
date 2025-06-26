@@ -17,6 +17,7 @@ import Animated, {
 } from 'react-native-reanimated';
 import {useEffect} from "react";
 import {LinearGradient} from "expo-linear-gradient";
+import {COLORS_CORE, THEMES} from "../../../constants/colors";
 
 export function TransferSummary() {
   const income = useTransactionStore(selectTotalIncome);
@@ -27,7 +28,7 @@ export function TransferSummary() {
 
   useEffect(() => {
     animation.value = withRepeat(
-      withTiming(1, { duration: 8000 }),
+      withTiming(1, {duration: 8000}),
       -1,
       true
     );
@@ -39,8 +40,8 @@ export function TransferSummary() {
 
     return {
       transform: [
-        { translateX },
-        { translateY },
+        {translateX},
+        {translateY},
       ],
     };
   });
@@ -51,21 +52,21 @@ export function TransferSummary() {
 
     return {
       transform: [
-        { translateX },
-        { translateY },
+        {translateX},
+        {translateY},
       ],
     };
   });
 
   return (
     <LinearGradient
-      colors={['#1e3a8a', '#3b82f6', '#60a5fa']}
-      start={{ x: 0, y: 0 }}
-      end={{ x: 1, y: 1 }}
+      colors={[THEMES[0].PRIMARY, THEMES[0].SECONDARY, THEMES[0].TERTIARY]}
+      start={{x: 0, y: 0}}
+      end={{x: 1, y: 1}}
       style={transferSummaryStyles.container}
     >
-      <Animated.View style={[transferSummaryStyles.decorativeCircle1, animatedStyle1]} />
-      <Animated.View style={[transferSummaryStyles.decorativeCircle2, animatedStyle2]} />
+      <Animated.View style={[transferSummaryStyles.decorativeCircle1, animatedStyle1]}/>
+      <Animated.View style={[transferSummaryStyles.decorativeCircle2, animatedStyle2]}/>
 
       <View style={transferSummaryStyles.total}>
         <Text style={transferSummaryStyles.totalPeriod}>{getCurrentMonthRange()}</Text>
@@ -73,8 +74,8 @@ export function TransferSummary() {
       </View>
 
       <View style={transferSummaryStyles.io}>
-        <FlowCard inOut={true} amount={income} />
-        <FlowCard inOut={false} amount={expense} />
+        <FlowCard inOut={true} amount={income}/>
+        <FlowCard inOut={false} amount={expense}/>
       </View>
     </LinearGradient>
   )
@@ -84,7 +85,8 @@ function FlowCard({inOut, amount}: { inOut: boolean, amount: number }) {
   return (
     <View style={transferSummaryStyles.flowCard}>
       <View style={transferSummaryStyles.flowIcon}>
-        <Ionicons name={inOut ? "arrow-up" : "arrow-down"} size={24} color={inOut ? "#1e3a8a" : "red"}/>
+        <Ionicons name={inOut ? "arrow-up" : "arrow-down"} size={24}
+                  color={inOut ? COLORS_CORE.GREEN_INCOME : COLORS_CORE.RED_EXPENSE}/>
       </View>
       <View>
         <Text style={transferSummaryStyles.flowType}>{inOut ? "Ingresos" : "Gastos"}</Text>

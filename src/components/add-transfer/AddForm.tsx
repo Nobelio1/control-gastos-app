@@ -13,6 +13,7 @@ import {LinearGradient} from 'expo-linear-gradient';
 import {TransactionForm, TransactionType} from "../../types/form.types";
 import {addFormStyles} from './AddForm.styles';
 import {useTransactionStore} from "../../storage/transactionStore";
+import {COLORS_CORE, THEMES} from "../../constants/colors";
 
 export function AddForm() {
   const {
@@ -210,8 +211,8 @@ export function AddForm() {
               <LinearGradient
                 colors={
                   isValid
-                    ? ['#6366F1', '#8B5CF6', '#EC4899']
-                    : ['#9CA3AF', '#9CA3AF', '#9CA3AF']
+                    ? [THEMES[0].PRIMARY, THEMES[0].SECONDARY, THEMES[0].TERTIARY]
+                    : [COLORS_CORE.DISABLED, COLORS_CORE.DISABLED, COLORS_CORE.DISABLED]
                 }
                 start={{x: 0, y: 0}}
                 end={{x: 1, y: 0}}

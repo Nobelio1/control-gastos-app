@@ -1,9 +1,10 @@
 import {StyleSheet} from 'react-native';
+import {COLORS_CORE, THEMES} from "../../constants/colors";
 
 export const addFormStyles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F3F4F6',
+    backgroundColor: COLORS_CORE.BACKGROUND,
     marginBottom: 45,
   },
   keyboardContainer: {
@@ -14,18 +15,11 @@ export const addFormStyles = StyleSheet.create({
     padding: 10,
     paddingTop: 20,
   },
-  title: {
-    fontSize: 24,
-    fontWeight: '600',
-    color: '#374151',
-    textAlign: 'center',
-    marginBottom: 40,
-  },
   inputCard: {
     backgroundColor: 'white',
     borderRadius: 12,
     marginBottom: 20,
-    shadowColor: '#000',
+    shadowColor: COLORS_CORE.TITLE,
     shadowOffset: {width: 0, height: 1},
     shadowOpacity: 0.05,
     shadowRadius: 2,
@@ -40,13 +34,13 @@ export const addFormStyles = StyleSheet.create({
   currencySymbol: {
     fontSize: 18,
     fontWeight: '500',
-    color: '#111827',
+    color: COLORS_CORE.TITLE,
     marginRight: 8,
   },
   amountInput: {
     fontSize: 18,
     fontWeight: '500',
-    color: '#111827',
+    color: COLORS_CORE.TITLE,
     textAlign: 'center',
     flex: 1,
     minWidth: 100,
@@ -68,13 +62,13 @@ export const addFormStyles = StyleSheet.create({
   menuLine: {
     width: 16,
     height: 2,
-    backgroundColor: '#9CA3AF',
+    backgroundColor: COLORS_CORE.SUBTITLE,
     borderRadius: 1,
   },
   descriptionInput: {
     flex: 1,
     fontSize: 16,
-    color: '#374151',
+    color: COLORS_CORE.SUBTITLE,
     paddingVertical: 16,
   },
   typeSelector: {
@@ -87,7 +81,7 @@ export const addFormStyles = StyleSheet.create({
   },
   arrowText: {
     fontSize: 18,
-    color: '#9CA3AF',
+    color: COLORS_CORE.SUBTITLE,
     fontWeight: 'bold',
   },
   typeOption: {
@@ -107,8 +101,8 @@ export const addFormStyles = StyleSheet.create({
     alignItems: 'center',
   },
   checkedBox: {
-    backgroundColor: '#6366F1',
-    borderColor: '#6366F1',
+    backgroundColor: THEMES[0].PRIMARY,
+    borderColor: THEMES[0].PRIMARY,
   },
   checkmark: {
     color: 'white',
@@ -117,19 +111,19 @@ export const addFormStyles = StyleSheet.create({
   },
   typeText: {
     fontSize: 16,
-    color: '#6B7280',
+    color: COLORS_CORE.SUBTITLE,
     fontWeight: '500',
   },
   selectedText: {
-    color: '#374151',
+    color: COLORS_CORE.TITLE,
     fontWeight: '600',
   },
   inputError: {
-    borderColor: '#EF4444',
+    borderColor: COLORS_CORE.RED_EXPENSE,
     borderWidth: 1,
   },
   errorText: {
-    color: '#EF4444',
+    color: COLORS_CORE.RED_EXPENSE,
     fontSize: 12,
     paddingHorizontal: 16,
     paddingBottom: 8,
@@ -153,16 +147,5 @@ export const addFormStyles = StyleSheet.create({
   },
   disabledButton: {
     opacity: 0.6,
-  },
-  debugContainer: {
-    backgroundColor: '#F3F4F6',
-    padding: 10,
-    borderRadius: 8,
-    marginTop: 10,
-  },
-  debugText: {
-    fontSize: 12,
-    color: '#6B7280',
-    fontFamily: 'monospace',
   },
 });

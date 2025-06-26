@@ -1,4 +1,5 @@
 import {StyleSheet} from 'react-native';
+import {COLORS_CORE, THEMES} from "../../../constants/colors";
 
 export const tabsStyles = StyleSheet.create({
   container: {
@@ -6,7 +7,7 @@ export const tabsStyles = StyleSheet.create({
   },
   tabContainer: {
     flexDirection: 'row',
-    backgroundColor: '#F3F4F6',
+    backgroundColor: COLORS_CORE.BACKGROUND,
     borderRadius: 12,
     padding: 4,
     position: 'relative',
@@ -19,10 +20,10 @@ export const tabsStyles = StyleSheet.create({
     zIndex: 1,
   },
   incomeIndicator: {
-    backgroundColor: '#6366F1',
+    backgroundColor: THEMES[0].PRIMARY,
   },
   expenseIndicator: {
-    backgroundColor: '#EF4444',
+    backgroundColor: COLORS_CORE.RED_EXPENSE,
   },
   tab: {
     paddingVertical: 12,
@@ -31,7 +32,7 @@ export const tabsStyles = StyleSheet.create({
     zIndex: 2,
   },
   tabText: {
-    color: '#6B7280',
+    color: COLORS_CORE.SUBTITLE,
     fontWeight: '500',
     fontSize: 16,
   },

@@ -7,6 +7,7 @@ import TransferScreen from '../screens/transfer-screen/TransferScreen';
 import AddScreen from '../screens/add-screen/AddScreen';
 import StatsScreen from '../screens/stats-screen/StatsScreen';
 import SettingsScreen from "../screens/settings-screen/SettingsScreen";
+import {COLORS_CORE, THEMES} from "../constants/colors";
 
 const Tab = createBottomTabNavigator();
 
@@ -24,7 +25,7 @@ const CustomTabButton = ({children, onPress}: { children: any, onPress?: any }) 
       width: 60,
       height: 60,
       borderRadius: 30,
-      backgroundColor: '#8B5CF6',
+      backgroundColor: THEMES[0].PRIMARY,
       justifyContent: 'center',
       alignItems: 'center',
     }}>
@@ -57,7 +58,7 @@ export default function BottomTabNavigator() {
               <Ionicons
                 name={focused ? 'home' : 'home-outline'}
                 size={20}
-                color={focused ? '#8B5CF6' : '#748c94'}
+                color={focused ? THEMES[0].PRIMARY : COLORS_CORE.OUTLINE_ICON}
               />
             </View>
           ),
@@ -74,7 +75,7 @@ export default function BottomTabNavigator() {
               <Ionicons
                 name={focused ? 'swap-horizontal' : 'swap-horizontal-outline'}
                 size={20}
-                color={focused ? '#8B5CF6' : '#748c94'}
+                color={focused ? THEMES[0].PRIMARY : COLORS_CORE.OUTLINE_ICON}
               />
             </View>
           ),
@@ -109,7 +110,7 @@ export default function BottomTabNavigator() {
               <Ionicons
                 name={focused ? 'bar-chart' : 'bar-chart-outline'}
                 size={20}
-                color={focused ? '#8B5CF6' : '#748c94'}
+                color={focused ? THEMES[0].PRIMARY : COLORS_CORE.OUTLINE_ICON}
               />
             </View>
           ),
@@ -126,7 +127,7 @@ export default function BottomTabNavigator() {
               <Ionicons
                 name={focused ? 'settings' : 'settings-outline'}
                 size={20}
-                color={focused ? '#8B5CF6' : '#748c94'}
+                color={focused ? THEMES[0].PRIMARY : COLORS_CORE.OUTLINE_ICON}
               />
             </View>
           ),
@@ -138,7 +139,7 @@ export default function BottomTabNavigator() {
 
 const styles = {
   shadow: {
-    shadowColor: '#7F5DF0',
+    shadowColor: THEMES[0].PRIMARY,
     shadowOffset: {
       width: 0,
       height: 10,

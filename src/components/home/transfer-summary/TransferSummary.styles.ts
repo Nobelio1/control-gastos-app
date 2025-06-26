@@ -2,7 +2,6 @@ import {StyleSheet} from 'react-native';
 
 export const transferSummaryStyles = StyleSheet.create({
   container: {
-    backgroundColor: '#8B5CF6',
     padding: 12,
     borderRadius: 8,
   },

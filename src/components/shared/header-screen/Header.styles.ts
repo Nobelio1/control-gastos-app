@@ -1,4 +1,5 @@
 import {StyleSheet} from 'react-native'
+import {COLORS_CORE} from "../../../constants/colors";
 
 export const HeaderStyles = StyleSheet.create({
   header: {
@@ -11,6 +12,6 @@ export const HeaderStyles = StyleSheet.create({
   headerTitle: {
     fontSize: 28,
     fontWeight: 'bold',
-    color: '#000',
+    color: COLORS_CORE.TITLE ,
   },
 })
