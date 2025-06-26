@@ -135,8 +135,7 @@ export function TransferCard({transaction}: Props) {
           onPress={handleEdit}
           activeOpacity={0.7}
         >
-          <Ionicons name="create-outline" size={20} color="white"/>
-          <Text style={transferCardStyles.actionText}>Editar</Text>
+          <Ionicons name="create-outline" size={24} color="white"/>
         </TouchableOpacity>
 
         <TouchableOpacity
@@ -144,8 +143,7 @@ export function TransferCard({transaction}: Props) {
           onPress={handleDelete}
           activeOpacity={0.7}
         >
-          <Ionicons name="trash-outline" size={20} color="white"/>
-          <Text style={transferCardStyles.actionText}>Eliminar</Text>
+          <Ionicons name="trash-outline" size={24} color="white"/>
         </TouchableOpacity>
       </Animated.View>
 
