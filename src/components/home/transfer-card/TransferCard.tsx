@@ -1,6 +1,5 @@
-import React from 'react';
-import { View, Text, TouchableOpacity, Alert } from 'react-native';
-import { Gesture, GestureDetector } from 'react-native-gesture-handler';
+import {View, Text, TouchableOpacity, Alert} from 'react-native';
+import {Gesture, GestureDetector} from 'react-native-gesture-handler';
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
@@ -9,23 +8,24 @@ import Animated, {
   interpolate,
   Extrapolation,
 } from 'react-native-reanimated';
-import { Ionicons } from '@expo/vector-icons';
-import { transferCardStyles } from "./TransferCard.styles";
-import { Transaction, TransactionType } from "../../../types/form.types";
-import { formatTransactionDate } from "../../../utils/dateUtils";
-import { useTransactionStore } from "../../../storage/transactionStore";
+import {Ionicons} from '@expo/vector-icons';
+import {transferCardStyles} from "./TransferCard.styles";
+import {useNavigation} from '@react-navigation/native';
+import {Transaction, TransactionType} from "../../../types/form.types";
+import {formatTransactionDate} from "../../../utils/dateUtils";
+import {useTransactionStore} from "../../../storage/transactionStore";
 
 interface Props {
   transaction: Transaction;
-  onEdit?: (transaction: Transaction) => void;
 }
 
 const SWIPE_THRESHOLD = 100;
 const ACTION_WIDTH = 70;
 
-export function TransferCard({ transaction, onEdit }: Props) {
-  const { description, date, amount, type, id } = transaction;
+export function TransferCard({transaction}: Props) {
+  const {description, date, amount, type, id} = transaction;
   const deleteTransaction = useTransactionStore(state => state.deleteTransaction);
+  const navigation = useNavigation<any>();
 
   const translateX = useSharedValue(0);
   const itemHeight = useSharedValue(80);
@@ -50,8 +50,8 @@ export function TransferCard({ transaction, onEdit }: Props) {
           text: 'Eliminar',
           style: 'destructive',
           onPress: () => {
-            opacity.value = withSpring(0, { damping: 15 });
-            itemHeight.value = withSpring(0, { damping: 15 }, (finished) => {
+            opacity.value = withSpring(0, {damping: 15});
+            itemHeight.value = withSpring(0, {damping: 15}, (finished) => {
               if (finished) {
                 runOnJS(deleteTransaction)(id);
               }
@@ -63,7 +63,7 @@ export function TransferCard({ transaction, onEdit }: Props) {
   };
 
   const handleDelete = () => {
-    translateX.value = withSpring(0, { damping: 15 });
+    translateX.value = withSpring(0, {damping: 15});
 
     setTimeout(() => {
       showDeleteAlert();
@@ -71,12 +71,11 @@ export function TransferCard({ transaction, onEdit }: Props) {
   };
 
   const handleEdit = () => {
-    translateX.value = withSpring(0, { damping: 15 });
-
+    translateX.value = withSpring(0, {damping: 15});
     setTimeout(() => {
-      if (onEdit) {
-        onEdit(transaction);
-      }
+      navigation.navigate('Add', {
+        editTransaction: transaction
+      });
     }, 300);
   };
 
@@ -92,16 +91,16 @@ export function TransferCard({ transaction, onEdit }: Props) {
       const shouldOpen = event.translationX < -SWIPE_THRESHOLD;
 
       if (shouldOpen) {
-        translateX.value = withSpring(-ACTION_WIDTH * 2, { damping: 15 });
+        translateX.value = withSpring(-ACTION_WIDTH * 2, {damping: 15});
       } else {
-        translateX.value = withSpring(0, { damping: 15 });
+        translateX.value = withSpring(0, {damping: 15});
       }
     });
 
   const tapGesture = Gesture.Tap()
     .onStart(() => {
       if (translateX.value !== 0) {
-        translateX.value = withSpring(0, { damping: 15 });
+        translateX.value = withSpring(0, {damping: 15});
       }
     });
 
@@ -109,7 +108,7 @@ export function TransferCard({ transaction, onEdit }: Props) {
 
   const cardStyle = useAnimatedStyle(() => {
     return {
-      transform: [{ translateX: translateX.value }],
+      transform: [{translateX: translateX.value}],
       opacity: opacity.value,
       height: itemHeight.value,
     };
@@ -136,7 +135,7 @@ export function TransferCard({ transaction, onEdit }: Props) {
           onPress={handleEdit}
           activeOpacity={0.7}
         >
-          <Ionicons name="create-outline" size={20} color="white" />
+          <Ionicons name="create-outline" size={20} color="white"/>
           <Text style={transferCardStyles.actionText}>Editar</Text>
         </TouchableOpacity>
 
@@ -145,7 +144,7 @@ export function TransferCard({ transaction, onEdit }: Props) {
           onPress={handleDelete}
           activeOpacity={0.7}
         >
-          <Ionicons name="trash-outline" size={20} color="white" />
+          <Ionicons name="trash-outline" size={20} color="white"/>
           <Text style={transferCardStyles.actionText}>Eliminar</Text>
         </TouchableOpacity>
       </Animated.View>

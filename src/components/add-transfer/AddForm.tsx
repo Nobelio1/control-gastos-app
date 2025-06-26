@@ -1,3 +1,4 @@
+import {useEffect} from 'react';
 import {
   View,
   Text,
@@ -6,21 +7,30 @@ import {
   SafeAreaView,
   KeyboardAvoidingView,
   Platform,
-  TouchableWithoutFeedback, Keyboard, Alert,
+  TouchableWithoutFeedback,
+  Keyboard,
+  Alert,
 } from 'react-native';
 import {useForm, Controller} from 'react-hook-form';
 import {LinearGradient} from 'expo-linear-gradient';
-import {TransactionForm, TransactionType} from "../../types/form.types";
+import {useNavigation} from '@react-navigation/native';
+import {Transaction, TransactionForm, TransactionType} from "../../types/form.types";
 import {addFormStyles} from './AddForm.styles';
 import {useTransactionStore} from "../../storage/transactionStore";
 import {COLORS_CORE, THEMES} from "../../constants/colors";
 
-export function AddForm() {
+interface Props {
+  editTransaction?: Transaction;
+}
+
+export function AddForm({editTransaction}: Props) {
+  const navigation = useNavigation();
   const {
     control,
     handleSubmit,
     watch,
     reset,
+    setValue,
     formState: {errors, isValid}
   } = useForm<TransactionForm>({
     defaultValues: {
@@ -32,10 +42,19 @@ export function AddForm() {
   });
 
   const addTransaction = useTransactionStore((state) => state.addTransaction);
+  const updateTransaction = useTransactionStore((state) => state.updateTransaction);
   const isLoading = useTransactionStore((state) => state.isLoading);
   const setLoading = useTransactionStore((state) => state.setLoading);
 
   const selectedType = watch('type');
+
+  useEffect(() => {
+    if (editTransaction) {
+      setValue('amount', editTransaction.amount);
+      setValue('description', editTransaction.description);
+      setValue('type', editTransaction.type);
+    }
+  }, [editTransaction, setValue]);
 
   const formatCurrency = (value: number): string => {
     if (value === 0) return '';
@@ -49,10 +68,24 @@ export function AddForm() {
 
   const onSubmit = (data: TransactionForm) => {
     setLoading(true);
-    addTransaction(data)
-    reset()
+
+    if (editTransaction) {
+      updateTransaction(editTransaction.id, data);
+      Alert.alert('Éxito', 'Transacción actualizada correctamente', [
+        {
+          text: 'OK',
+          onPress: () => {
+            navigation.goBack();
+          }
+        }
+      ]);
+    } else {
+      addTransaction(data);
+      reset();
+      Alert.alert('Éxito', 'Transacción guardada correctamente');
+    }
+
     Keyboard.dismiss();
-    Alert.alert('Exito', 'Transacción guardada correctamente')
     setLoading(false);
   };
 
@@ -147,9 +180,7 @@ export function AddForm() {
                     <View style={addFormStyles.arrowIcon}>
                       <Text style={addFormStyles.arrowText}>⇅</Text>
                     </View>
-                    <View
-                      style={addFormStyles.typeOption}
-                    >
+                    <View style={addFormStyles.typeOption}>
                       <TouchableOpacity
                         onPress={() => onChange(TransactionType.INCOME)}
                       >
@@ -170,9 +201,7 @@ export function AddForm() {
                       </Text>
                     </View>
 
-                    <View
-                      style={addFormStyles.typeOption}
-                    >
+                    <View style={addFormStyles.typeOption}>
                       <TouchableOpacity
                         onPress={() => onChange(TransactionType.EXPENSE)}
                       >
@@ -219,7 +248,10 @@ export function AddForm() {
                 style={addFormStyles.saveButton}
               >
                 <Text style={addFormStyles.saveButtonText}>
-                  {isLoading ? 'Guardando...' : 'Guardar'}
+                  {isLoading
+                    ? (editTransaction ? 'Actualizando...' : 'Guardando...')
+                    : (editTransaction ? 'Actualizar' : 'Guardar')
+                  }
                 </Text>
               </LinearGradient>
             </TouchableOpacity>
@@ -229,4 +261,3 @@ export function AddForm() {
     </SafeAreaView>
   );
 }
-
