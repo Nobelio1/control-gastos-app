@@ -16,7 +16,7 @@ export const transferHistoryStyles = StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
     color: COLORS_CORE.TITLE,
-    marginBottom: 30,
+    marginBottom: 20,
   },
   contentContainer: {
     gap: 10,
