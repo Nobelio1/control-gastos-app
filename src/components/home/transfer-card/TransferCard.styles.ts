@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import {COLORS_CORE} from "../../../constants/colors";
+import {COLORS_CORE, THEMES} from "../../../constants/colors";
 
 export const transferCardStyles = StyleSheet.create({
   container: {
@@ -54,7 +54,6 @@ export const transferCardStyles = StyleSheet.create({
     color: COLORS_CORE.RED_EXPENSE,
   },
   swipeContainer: {
-    marginBottom: 8,
     overflow: 'hidden',
     borderRadius: 12,
   },
@@ -68,7 +67,7 @@ export const transferCardStyles = StyleSheet.create({
     zIndex: 1,
   },
   editAction: {
-    backgroundColor: '#3B82F6',
+    backgroundColor: THEMES[0].PRIMARY,
     width: 70,
     height: '100%',
     justifyContent: 'center',
@@ -76,18 +75,12 @@ export const transferCardStyles = StyleSheet.create({
     paddingHorizontal: 8,
   },
   deleteAction: {
-    backgroundColor: '#EF4444',
+    backgroundColor: COLORS_CORE.RED_EXPENSE,
     width: 70,
     height: '100%',
     justifyContent: 'center',
     alignItems: 'center',
     paddingHorizontal: 8,
-  },
-  actionText: {
-    color: 'white',
-    fontSize: 10,
-    fontWeight: '600',
-    marginTop: 2,
   },
   iconText: {
     color: 'white',
