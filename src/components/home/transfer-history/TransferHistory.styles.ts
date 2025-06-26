@@ -5,6 +5,7 @@ export const transferHistoryStyles = StyleSheet.create({
   container: {
     flex: 1,
     marginTop: 30,
+    marginBottom: 60,
   },
   content: {
     flex: 1,
